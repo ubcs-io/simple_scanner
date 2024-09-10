@@ -20,9 +20,6 @@ func _process(delta) -> void:
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
-		
-	print(velocity.x)
-	print(velocity.y)
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
