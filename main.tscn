@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmlbato2pdp75"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_fl0d2"]
+[ext_resource type="PackedScene" uid="uid://bx033pw32ucqt" path="res://cursor.tscn" id="1_q57yj"]
+[ext_resource type="PackedScene" uid="uid://defuwqrem14i6" path="res://contact.tscn" id="2_j4duc"]
+[ext_resource type="PackedScene" uid="uid://dq1ok16w3lado" path="res://hud.tscn" id="4_33h0t"]
+
+[node name="main" type="Node"]
+script = ExtResource("1_fl0d2")
+contact = ExtResource("2_j4duc")
+
+[node name="cursor" parent="." instance=ExtResource("1_q57yj")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(240, 450)
+
+[node name="HUD" parent="." instance=ExtResource("4_33h0t")]
+
+[connection signal="hit" from="cursor" to="." method="_increment_signals"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
