@@ -28,3 +28,4 @@ sprite_frames = SubResource("SpriteFrames_ef7h1")
 shape = SubResource("CircleShape2D_5xncm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
