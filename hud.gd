@@ -12,6 +12,9 @@ func update_score(score):
 	$ScoreLabel.text = str(score)
 	
 func _on_start_button_pressed():
-	print('started')
 	$StartButton.hide()
 	start_game.emit()
+
+func _on_main_gameover() -> void:
+	$StartButton.show()
+	$ScoreLabel.text = str(0)

@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmlbato2pdp75"]
+[gd_scene load_steps=7 format=3 uid="uid://cmlbato2pdp75"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_fl0d2"]
 [ext_resource type="PackedScene" uid="uid://bx033pw32ucqt" path="res://cursor.tscn" id="1_q57yj"]
 [ext_resource type="PackedScene" uid="uid://defuwqrem14i6" path="res://contact.tscn" id="2_j4duc"]
 [ext_resource type="PackedScene" uid="uid://dq1ok16w3lado" path="res://hud.tscn" id="4_33h0t"]
+[ext_resource type="AudioStream" uid="uid://c8s3i0gxv8nte" path="res://assets/contact_new.ogg" id="5_fc2di"]
+[ext_resource type="AudioStream" uid="uid://ct0x4irf3ps5a" path="res://assets/contact_locked.ogg" id="6_u0sbw"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_fl0d2")
@@ -19,5 +21,14 @@ position = Vector2(240, 450)
 
 [node name="HUD" parent="." instance=ExtResource("4_33h0t")]
 
+[node name="contact_new" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fc2di")
+
+[node name="contact_locked" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_u0sbw")
+
+[connection signal="gameover" from="." to="." method="_on_gameover"]
+[connection signal="gameover" from="." to="cursor" method="_on_main_gameover"]
+[connection signal="gameover" from="." to="HUD" method="_on_main_gameover"]
 [connection signal="hit" from="cursor" to="." method="_increment_signals"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]

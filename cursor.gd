@@ -30,10 +30,18 @@ func _process(delta) -> void:
 func _on_body_entered(body):
 	hit.emit()
 	
+	# For some reason some instances don't have a contact name
+	print(body.name)
+	
+	#if body.name == "contact":
+	if body is RigidBody2D:
+		body.queue_free()
+		#print("hit!")
+	
 func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
 
-func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	pass # Replace with function body.
+func _on_main_gameover() -> void:
+	hide()
