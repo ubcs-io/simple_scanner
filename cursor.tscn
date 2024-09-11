@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bx033pw32ucqt"]
+[gd_scene load_steps=6 format=3 uid="uid://bx033pw32ucqt"]
 
 [ext_resource type="Script" path="res://cursor.gd" id="1_jpcwt"]
 [ext_resource type="Texture2D" uid="uid://bc32wskprvpmb" path="res://assets/contact_cursor.png" id="1_qcy51"]
+[ext_resource type="AudioStream" uid="uid://bbgwv7mtpoqit" path="res://assets/sounds/impactMetal_003.ogg" id="3_g8vgh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ef7h1"]
 animations = [{
@@ -15,7 +16,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5xncm"]
-radius = 64.0078
+radius = 46.0435
 
 [node name="cursor" type="Area2D"]
 script = ExtResource("1_jpcwt")
@@ -26,5 +27,8 @@ sprite_frames = SubResource("SpriteFrames_ef7h1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5xncm")
+
+[node name="contact_isolated" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_g8vgh")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

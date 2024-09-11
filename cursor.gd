@@ -2,8 +2,10 @@ extends Area2D
 
 @export var speed = 400
 var screen_size
+var on_contact
 
 signal hit
+signal locked
 
 func _ready() -> void:
 	hide()
@@ -26,17 +28,27 @@ func _process(delta) -> void:
 
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
+	
+	if Input.is_action_pressed("space"):
+		if on_contact != null:
+			lock_contact(on_contact)
 
 func _on_body_entered(body):
 	hit.emit()
+	# Ideally this should activate an animation on the signal, but this'll do for now
+	$contact_isolated.play()
+	on_contact = body
+		
+func lock_contact(body):
 	
 	# For some reason some instances don't have a contact name
-	print(body.name)
-	
 	#if body.name == "contact":
+	#print(body.name)
+	
 	if body is RigidBody2D:
 		body.queue_free()
-		#print("hit!")
+		on_contact = null
+		locked.emit()
 	
 func start(pos):
 	position = pos

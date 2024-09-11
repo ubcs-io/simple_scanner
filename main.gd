@@ -17,7 +17,7 @@ func _process(_delta) -> void:
 		search_for_life = randi_range(0,5000)
 		if search_for_life < 50:
 			var contact = contact.instantiate()
-			contact.position = Vector2(randi_range(100,1100), randi_range(100,550))
+			contact.position = Vector2(randi_range(200,1100), randi_range(100,550))
 			add_child(contact)
 			$contact_new.play()
 			total_contacts = total_contacts + 1
