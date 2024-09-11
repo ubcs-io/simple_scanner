@@ -28,7 +28,7 @@ func _process(delta) -> void:
 
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
-	
+		
 	if Input.is_action_pressed("space"):
 		if on_contact != null:
 			lock_contact(on_contact)
