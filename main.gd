@@ -30,8 +30,6 @@ func _increment_signals():
 	if score > 3:
 		gameover.emit()
 		get_tree().call_group("contacts", "queue_free")
-		#for contact in get_tree().get_nodes_in_group("contacts"):
-			#contact.queue_free()
 
 func new_game():
 	score = 0
