@@ -45,7 +45,7 @@ func lock_contact(body):
 	#if body.name == "contact":
 	#print(body.name)
 	
-	if body is RigidBody2D:
+	if body.is_in_group("contacts"):
 		body.queue_free()
 		on_contact = null
 		locked.emit()
