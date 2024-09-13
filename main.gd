@@ -1,11 +1,14 @@
 extends Node
 
 @export var contact: PackedScene
+@export var ship_speed = 10
+@export var signal_rate = 5000
+@export var max_contacts = 5
+
 var score = 0
 var search_for_life = 0
 var total_contacts = 0
 var at_menu = 1
-var ship_speed = 10
 
 signal gameover
 
@@ -21,8 +24,8 @@ func _process(_delta) -> void:
 		if ship_speed > 5:
 			ship_speed -= 5
 	
-	if total_contacts < 50 and at_menu == 0:
-		search_for_life = randi_range(0,50000) / ship_speed
+	if total_contacts < max_contacts and at_menu == 0:
+		search_for_life = randi_range(1,signal_rate) / ship_speed
 		print(search_for_life)
 		if search_for_life < 5:
 			var contact = contact.instantiate()
