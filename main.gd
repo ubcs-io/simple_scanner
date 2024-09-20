@@ -55,8 +55,7 @@ func _process(_delta) -> void:
 			var contact = contact.instantiate()
 			contact.position = Vector2(randi_range(200,1100), randi_range(100,550))
 			add_child(contact)
-			contact_id = contact.get_instance_id()
-			contact_server(contact_id, 1337, "detected", "A new contact has appeared", "update")
+			contact_server(contact.get_instance_id(), 1337, "detected", "A new contact has appeared", "update")
 			$contact_new.play()
 			total_contacts = total_contacts + 1
 
@@ -67,7 +66,10 @@ func _increment_signals(contact_id):
 	$HUD.update_score(score)
 	#print("Remove contact with id: " + str(contact_id))
 	contact_server(contact_id, 1337, "locked", "Contact locked", "update")
+	#print(score)
 	if score > 3:
+		#on_gameover()
+		# For some reason the signal suddenly isn't working anymore
 		gameover.emit()
 		get_tree().call_group("contacts", "queue_free")
 
@@ -93,22 +95,24 @@ func contact_server(id, session, status, message, event_type):
 	var send_request = request.request(
 		url, headers, HTTPClient.METHOD_GET)
 		
-	if send_request != OK:
+	#if send_request != OK:
 		#print(url)
-		print('Issue with request')
+		#print('Issue with request')
 	
 func _on_request_completed(result, response_code, headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())
 	#print(response_code, headers)
-	#print(json)
+	print(json)
 	update_game(json)
 	
 func update_game(heartbeat):
 	if 'status' in heartbeat && heartbeat.status == "locked":
-		print("Sending lock signal for " + str(heartbeat.id))
-		for contact in contact.get_children():
-			if heartbeat.id == contact.id:
-					print("Should remove: " + contact.id)
+		#print("Sending lock signal for " + str(heartbeat.id))
+		if instance_from_id(int(heartbeat.id)):
+			print("Should remove: " + heartbeat.id)
+		#for contact in contact.get_wchildren():
+			#if heartbeat.id == contact.id:
+					#print("Should remove: " + contact.id)
 		#locked.emit(heartbeat.id)
 		#$cursor.lock_contact_by_id(heartbeat.id)
 	

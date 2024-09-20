@@ -28,5 +28,8 @@ stream = ExtResource("5_fc2di")
 [node name="contact_locked" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_u0sbw")
 
+[connection signal="gameover" from="." to="." method="_on_gameover"]
+[connection signal="gameover" from="." to="cursor" method="_on_main_gameover"]
+[connection signal="gameover" from="." to="HUD" method="_on_main_gameover"]
 [connection signal="locked" from="cursor" to="." method="_increment_signals"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
