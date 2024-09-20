@@ -44,11 +44,16 @@ func _on_body_entered(body):
 func lock_contact(body):	
 	if body.is_in_group("contacts"):
 		on_contact = null
+		remove_body(body)
 		locked.emit(body.get_instance_id())
 		
 func lock_contact_by_id (contact_id):
 	var contact_to_remove = instance_from_id(int(contact_id))
-	contact_to_remove.queue_free()
+	remove_body(contact_to_remove)
+	locked.emit(int(contact_id))
+	
+func remove_body (body):
+	body.queue_free()
 	
 func start(pos):
 	position = pos

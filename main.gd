@@ -12,6 +12,7 @@ var score = 0
 var search_for_life = 0
 var total_contacts = 0
 var at_menu = 1
+var locked_contacts = []
 
 var headers
 var body
@@ -49,27 +50,26 @@ func _process(_delta) -> void:
 		if ship_speed > 5:
 			ship_speed -= 5
 	
+	total_contacts = get_tree().get_nodes_in_group("contacts").size()
 	if total_contacts < max_contacts and at_menu == 0:
+		
 		search_for_life = randi_range(1,signal_rate) / ship_speed
 		if search_for_life < 5:
 			var contact = contact.instantiate()
 			contact.position = Vector2(randi_range(200,1100), randi_range(100,550))
 			add_child(contact)
+			print(get_tree().get_nodes_in_group("contacts").size())
 			contact_server(contact.get_instance_id(), 1337, "detected", "A new contact has appeared", "update")
 			$contact_new.play()
-			total_contacts = total_contacts + 1
 
 func _increment_signals(contact_id):
 	$contact_locked.play()
-	score = score + 1
-	total_contacts = total_contacts - 1
-	$HUD.update_score(score)
-	#print("Remove contact with id: " + str(contact_id))
+	locked_contacts.append(str(contact_id))
 	contact_server(contact_id, 1337, "locked", "Contact locked", "update")
-	#print(score)
-	if score > 3:
-		#on_gameover()
-		# For some reason the signal suddenly isn't working anymore
+	score = locked_contacts.size()
+	$HUD.update_score(score)
+	print(locked_contacts)
+	if score >= 3:
 		gameover.emit()
 		get_tree().call_group("contacts", "queue_free")
 
@@ -77,7 +77,6 @@ func server_heartbeat_timeout():
 	var heartbeat = contact_server(1, 1337, "none", "none", "sync")
 	
 func contact_server(id, session, status, message, event_type):
-
 	contact_id = str(id)
 	session = str(session)
 	status = status.uri_encode()
@@ -106,10 +105,12 @@ func _on_request_completed(result, response_code, headers, body):
 	update_game(json)
 	
 func update_game(heartbeat):
-	if 'status' in heartbeat && heartbeat.status == "locked":
-		if instance_from_id(int(heartbeat.id)):
+	if 'status' in heartbeat && heartbeat.status == "locked" && at_menu == 0:
+		if !locked_contacts.has(str(heartbeat.id)):
+			print(locked_contacts)
+			print("Remove " + str(heartbeat.id))
 			$cursor.lock_contact_by_id(heartbeat.id)
-			_increment_signals(heartbeat.id)
+			#_increment_signals(heartbeat.id)
 
 
 # Game start/end methods
@@ -121,7 +122,7 @@ func new_game():
 
 func _on_gameover():
 	score = 0
-	total_contacts = 0 
+	locked_contacts = []
 	at_menu = 1
 	await get_tree().create_timer(2.0).timeout
 	contact_server(1, 1337, "none", "No contacts present", "update")
