@@ -10,6 +10,7 @@
 [node name="main" type="Node"]
 script = ExtResource("1_fl0d2")
 contact = ExtResource("2_j4duc")
+max_contacts = 3
 
 [node name="cursor" parent="." instance=ExtResource("1_q57yj")]
 
@@ -17,7 +18,7 @@ contact = ExtResource("2_j4duc")
 wait_time = 3.0
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(240, 450)
+position = Vector2(150, 200)
 
 [node name="HUD" parent="." instance=ExtResource("4_33h0t")]
 
@@ -30,5 +31,5 @@ stream = ExtResource("6_u0sbw")
 [connection signal="gameover" from="." to="." method="_on_gameover"]
 [connection signal="gameover" from="." to="cursor" method="_on_main_gameover"]
 [connection signal="gameover" from="." to="HUD" method="_on_main_gameover"]
-[connection signal="hit" from="cursor" to="." method="_increment_signals"]
+[connection signal="locked" from="cursor" to="." method="_increment_signals"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
