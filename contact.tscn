@@ -26,5 +26,3 @@ sprite_frames = SubResource("SpriteFrames_8dwoj")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kfmgx")
-
-[connection signal="locked" from="." to="." method="_lock_contact_by_id"]

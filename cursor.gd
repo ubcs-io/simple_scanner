@@ -41,10 +41,17 @@ func _on_body_entered(body):
 		
 func lock_contact(body):	
 	if body.is_in_group("contacts"):
-		#body.queue_free()
 		on_contact = null
 		locked.emit(body.get_instance_id())
-		print("Sending lock signal for " + str(body.get_instance_id()))
+		#print(body)
+		#print("Sending lock signal for " + str(body.get_instance_id()))
+		lock_contact_by_id(body.get_instance_id())
+		
+func lock_contact_by_id (contact_id):
+	print("Removing contact " + str(contact_id))
+	var contact_to_remove = instance_from_id(int(contact_id))
+	print(contact_to_remove)
+	contact_to_remove.queue_free()
 	
 func start(pos):
 	position = pos

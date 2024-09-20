@@ -77,8 +77,8 @@ func server_heartbeat_timeout():
 func contact_server(id, session, status, message, event_type):
 
 	contact_id = str(id)
-	status = status.uri_encode()
 	session = str(session)
+	status = status.uri_encode()
 	message = message.uri_encode()
 
 #	# This one gets mad about initializing
@@ -100,13 +100,17 @@ func contact_server(id, session, status, message, event_type):
 func _on_request_completed(result, response_code, headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())
 	#print(response_code, headers)
-	print(json)
+	#print(json)
 	update_game(json)
 	
 func update_game(heartbeat):
 	if 'status' in heartbeat && heartbeat.status == "locked":
 		print("Sending lock signal for " + str(heartbeat.id))
-		locked.emit(heartbeat.id)
+		for contact in contact.get_children():
+			if heartbeat.id == contact.id:
+					print("Should remove: " + contact.id)
+		#locked.emit(heartbeat.id)
+		#$cursor.lock_contact_by_id(heartbeat.id)
 	
 # Game start/end methods
 func new_game():
