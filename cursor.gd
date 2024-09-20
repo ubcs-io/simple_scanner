@@ -39,16 +39,12 @@ func _on_body_entered(body):
 	$contact_isolated.play()
 	on_contact = body
 		
-func lock_contact(body):
-	
-	# For some reason some instances don't have a contact name
-	#if body.name == "contact":
-	#print(body.name)
-	
+func lock_contact(body):	
 	if body.is_in_group("contacts"):
-		body.queue_free()
+		#body.queue_free()
 		on_contact = null
-		locked.emit()
+		locked.emit(body.get_instance_id())
+		print("Sending lock signal for " + str(body.get_instance_id()))
 	
 func start(pos):
 	position = pos
