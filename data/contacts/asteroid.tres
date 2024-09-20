@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Contact" load_steps=3 format=3 uid="uid://dm8l0gt78crao"]
+
+[ext_resource type="PackedScene" uid="uid://c7okacih5xcx7" path="res://asset_scenes/asteroid.tscn" id="1_1pagb"]
+[ext_resource type="Script" path="res://data/contact.gd" id="1_ror8t"]
+
+[resource]
+script = ExtResource("1_ror8t")
+id = 0
+name = "asteroid"
+rarity = "50"
+min_value = 50
+max_value = 100
+min_storage = 50
+max_storage = 200
+scene = ExtResource("1_1pagb")

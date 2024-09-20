@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Contact" load_steps=2 format=3 uid="uid://onfga2sonm7f"]
+
+[ext_resource type="Script" path="res://data/contact.gd" id="1_f6nkk"]
+
+[resource]
+script = ExtResource("1_f6nkk")
+id = 0
+name = "scrap"
+rarity = "30"
+min_value = 75
+max_value = 150
+min_storage = 50
+max_storage = 100
