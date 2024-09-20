@@ -38,19 +38,16 @@ func _on_body_entered(body):
 	# Ideally this should activate an animation on the signal, but this'll do for now
 	$contact_isolated.play()
 	on_contact = body
+	
+	# Send a connected call to the server indicating it's been isolated
 		
 func lock_contact(body):	
 	if body.is_in_group("contacts"):
 		on_contact = null
 		locked.emit(body.get_instance_id())
-		#print(body)
-		#print("Sending lock signal for " + str(body.get_instance_id()))
-		lock_contact_by_id(body.get_instance_id())
 		
 func lock_contact_by_id (contact_id):
-	print("Removing contact " + str(contact_id))
 	var contact_to_remove = instance_from_id(int(contact_id))
-	print(contact_to_remove)
 	contact_to_remove.queue_free()
 	
 func start(pos):
