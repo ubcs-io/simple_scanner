@@ -1,6 +1,8 @@
 extends Node
 
-@export var contact: PackedScene
+#@export var contact: PackedScene
+@export var contact:Contact
+
 @export var ship_speed = 10
 @export var signal_rate = 5000
 @export var max_contacts = 5
@@ -31,6 +33,7 @@ signal gameover
 signal locked
 
 func _ready() -> void:
+	
 	request = HTTPRequest.new()
 	add_child(request)
 	request.connect("request_completed", _on_request_completed)
@@ -55,7 +58,7 @@ func _process(_delta) -> void:
 		
 		search_for_life = randi_range(1,signal_rate) / ship_speed
 		if search_for_life < 5:
-			var contact = contact.instantiate()
+			var contact = contact.scene.instantiate()
 			contact.position = Vector2(randi_range(200,1100), randi_range(100,550))
 			add_child(contact)
 			print(get_tree().get_nodes_in_group("contacts").size())
