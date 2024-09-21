@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://defuwqrem14i6"]
+[gd_scene load_steps=5 format=3 uid="uid://q6to7483l0w7"]
 
-[ext_resource type="Script" path="res://contact.gd" id="1_8r2d7"]
-[ext_resource type="Texture2D" uid="uid://bgn601c1xgiio" path="res://assets/contact_unknown.png" id="2_i0flo"]
+[ext_resource type="Script" path="res://contacts/object.gd" id="1_707xu"]
+[ext_resource type="Texture2D" uid="uid://jq2ru2ml4aw4" path="res://assets/crosshairs/White/crosshair098.png" id="2_2k3v5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8dwoj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_i0flo")
+"texture": ExtResource("2_2k3v5")
 }],
 "loop": true,
 "name": &"default",
@@ -15,13 +15,14 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kfmgx"]
-radius = 44.0
+radius = 20.0
 
-[node name="contact" type="RigidBody2D"]
+[node name="object" type="RigidBody2D"]
 gravity_scale = 0.0
-script = ExtResource("1_8r2d7")
+script = ExtResource("1_707xu")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_8dwoj")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]

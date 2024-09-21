@@ -1,6 +1,10 @@
 extends Node
 
 @export var contact: PackedScene
+@export var asteroid: PackedScene
+@export var object: PackedScene
+@export var data: PackedScene
+
 @export var ship_speed = 10
 @export var signal_rate = 5000
 @export var max_contacts = 5
@@ -9,6 +13,9 @@ var request : HTTPRequest
 var root_url : String = "https://typeri.us/dora_brain?"
 
 var score = 0
+var credits = 0
+var capacity = 0
+var starting_capacity = 1000
 var search_for_life = 0
 var total_contacts = 0
 var at_menu = 1
@@ -40,6 +47,9 @@ func _ready() -> void:
 	server_heartbeat.one_shot = false
 	server_heartbeat.connect("timeout", server_heartbeat_timeout)
 	server_heartbeat.start()
+	
+	# Set the ship's starting capacity
+	capacity = starting_capacity
 
 func _process(_delta) -> void:
 	
@@ -55,21 +65,41 @@ func _process(_delta) -> void:
 		
 		search_for_life = randi_range(1,signal_rate) / ship_speed
 		if search_for_life < 5:
-			var contact = contact.instantiate()
+
+			var contact = randomize_encounters()
+			
 			contact.position = Vector2(820 + randi_range(-275,275), 315 + randi_range(-275,275))
 			add_child(contact)
-			print(get_tree().get_nodes_in_group("contacts").size())
 			contact_server(contact.get_instance_id(), 1337, "detected", "A new contact has appeared", "update")
 			$contact_new.play()
+
+func randomize_encounters():
+	var contact_variant
+	var asteroid_rate = 2000
+	var object_rate = 750
+	var data_rate = 100
+	var rand = randf_range(0,asteroid_rate + object_rate + data_rate)
+	if rand <= asteroid_rate:
+		contact_variant = asteroid
+	elif rand > object_rate && rand <= (asteroid_rate + object_rate):
+		contact_variant = object
+	elif rand > (asteroid_rate + object_rate):
+		contact_variant = data
+		
+	return contact_variant.instantiate()
 
 func _increment_signals(contact_id):
 	$contact_locked.play()
 	locked_contacts.append(str(contact_id))
+	var locked_contact = instance_from_id(int(contact_id))
+	credits = credits + locked_contact.value
+	capacity = capacity - locked_contact.size
 	contact_server(contact_id, 1337, "locked", "Contact locked", "update")
-	score = locked_contacts.size()
-	$HUD.update_score(score)
-	print(locked_contacts)
-	if score >= 3:
+	$HUD.update_score(credits, capacity)
+	
+	# This should move to be triggered by the cursor hit instead of lock
+	$HUD.update_ui_messages(locked_contact.category, locked_contact.type)
+	if capacity <= 0:
 		gameover.emit()
 		get_tree().call_group("contacts", "queue_free")
 
@@ -108,20 +138,20 @@ func update_game(heartbeat):
 	if 'status' in heartbeat && heartbeat.status == "locked" && at_menu == 0:
 		if !locked_contacts.has(str(heartbeat.id)):
 			print(locked_contacts)
-			print("Remove " + str(heartbeat.id))
+			print("Remove by remote " + str(heartbeat.id))
 			$cursor.lock_contact_by_id(heartbeat.id)
-			#_increment_signals(heartbeat.id)
-
 
 # Game start/end methods
 func new_game():
-	score = 0
+	#score = 0
 	at_menu = 0
 	contact_server(1, 1337, "none", "Scanner warming up", "update")
 	$cursor.start($StartPosition.position)
 
 func _on_gameover():
-	score = 0
+	#score = 0
+	credits = 0
+	capacity = starting_capacity
 	locked_contacts = []
 	at_menu = 1
 	await get_tree().create_timer(2.0).timeout

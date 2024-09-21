@@ -16,42 +16,77 @@ scale = Vector2(1.07213, 1.08041)
 texture = ExtResource("2_du02q")
 
 [node name="Button" type="Sprite2D" parent="ScannerOverlay"]
-position = Vector2(280.82, 409.5)
+position = Vector2(279.82, 485.5)
 scale = Vector2(0.719039, 0.797771)
 texture = ExtResource("3_oqdjm")
 
 [node name="Button2" type="Sprite2D" parent="ScannerOverlay"]
-position = Vector2(282.82, 527.5)
+position = Vector2(281.82, 603.5)
 scale = Vector2(0.719039, 0.797771)
 texture = ExtResource("3_oqdjm")
 
 [node name="Switch" type="Sprite2D" parent="ScannerOverlay"]
-position = Vector2(270.82, 226.5)
+position = Vector2(269.82, 302.5)
 scale = Vector2(0.565287, 0.565287)
 texture = ExtResource("4_d0ovp")
 
 [node name="Switch3" type="Sprite2D" parent="ScannerOverlay"]
-position = Vector2(377.82, 221.5)
+position = Vector2(376.82, 297.5)
 scale = Vector2(0.565287, 0.565287)
 texture = ExtResource("4_d0ovp")
 flip_v = true
 
 [node name="Switch2" type="Sprite2D" parent="ScannerOverlay"]
-position = Vector2(167.82, 223.5)
+position = Vector2(166.82, 299.5)
 scale = Vector2(0.565287, 0.565287)
 texture = ExtResource("4_d0ovp")
 
-[node name="ScoreLabel" type="Label" parent="."]
+[node name="Score_widget" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Capacity_label" type="Label" parent="Score_widget"]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 1179.0
+offset_bottom = 684.0
+theme_override_font_sizes/font_size = 30
+text = "Hold Capacity:"
+
+[node name="Capacity" type="Label" parent="Score_widget"]
+offset_left = 238.0
+offset_top = 24.0
+offset_right = 1393.0
+offset_bottom = 684.0
+theme_override_font_sizes/font_size = 30
+text = "1000"
+
+[node name="Credits" type="Label" parent="Score_widget"]
+offset_left = 206.0
+offset_top = 85.0
+offset_right = 1361.0
+offset_bottom = 745.0
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="Credits_label" type="Label" parent="Score_widget"]
+offset_left = 26.0
+offset_top = 84.0
+offset_right = 1181.0
+offset_bottom = 744.0
+theme_override_font_sizes/font_size = 30
+text = "Est. Credits:"
+
+[node name="ScoreLabel" type="Label" parent="Score_widget"]
+visible = false
 offset_left = 8.0
 offset_top = -1.0
 offset_right = 1163.0
 offset_bottom = 659.0
 theme_override_font_sizes/font_size = 30
 text = "0"
-
-[node name="Message" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
 
 [node name="StartButton" type="Button" parent="."]
 anchors_preset = 8
@@ -68,5 +103,30 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 60
 text = "Begin Scanning"
+
+[node name="contact_info" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="contact_name" type="Label" parent="contact_info"]
+offset_left = 97.0
+offset_top = 413.0
+offset_right = 410.0
+offset_bottom = 478.0
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="contact_message" type="Label" parent="contact_info"]
+offset_left = 98.0
+offset_top = 532.0
+offset_right = 411.0
+offset_bottom = 597.0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
