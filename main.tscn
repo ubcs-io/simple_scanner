@@ -18,7 +18,7 @@ max_contacts = 3
 wait_time = 3.0
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(150, 200)
+position = Vector2(820, 315)
 
 [node name="HUD" parent="." instance=ExtResource("4_33h0t")]
 
