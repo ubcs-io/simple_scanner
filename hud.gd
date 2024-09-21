@@ -5,7 +5,7 @@ signal start_game
 func _ready() -> void:
 	$ScannerOverlay.hide()
 	$Score_widget.hide()
-	pass # Replace with function body.
+	$contact_info.hide()
 
 func _process(_delta) -> void:
 	pass
@@ -22,6 +22,7 @@ func _on_start_button_pressed():
 	$StartButton.hide()
 	$ScannerOverlay.show()
 	$Score_widget.show()
+	$contact_info.show()
 	$Score_widget/Credits.text = str(0)
 	$Score_widget/Capacity.text = str(1000)
 	start_game.emit()

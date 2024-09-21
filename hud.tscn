@@ -9,6 +9,7 @@
 script = ExtResource("1_uydfi")
 
 [node name="ScannerOverlay" type="Area2D" parent="."]
+visible = false
 
 [node name="ScannerPlate" type="Sprite2D" parent="ScannerOverlay"]
 position = Vector2(573.979, 328.75)
@@ -48,6 +49,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Capacity_label" type="Label" parent="Score_widget"]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 1179.0
@@ -56,6 +58,7 @@ theme_override_font_sizes/font_size = 30
 text = "Hold Capacity:"
 
 [node name="Capacity" type="Label" parent="Score_widget"]
+layout_mode = 0
 offset_left = 238.0
 offset_top = 24.0
 offset_right = 1393.0
@@ -64,6 +67,7 @@ theme_override_font_sizes/font_size = 30
 text = "1000"
 
 [node name="Credits" type="Label" parent="Score_widget"]
+layout_mode = 0
 offset_left = 206.0
 offset_top = 85.0
 offset_right = 1361.0
@@ -72,6 +76,7 @@ theme_override_font_sizes/font_size = 30
 text = "0"
 
 [node name="Credits_label" type="Label" parent="Score_widget"]
+layout_mode = 0
 offset_left = 26.0
 offset_top = 84.0
 offset_right = 1181.0
@@ -81,6 +86,7 @@ text = "Est. Credits:"
 
 [node name="ScoreLabel" type="Label" parent="Score_widget"]
 visible = false
+layout_mode = 0
 offset_left = 8.0
 offset_top = -1.0
 offset_right = 1163.0
@@ -111,21 +117,25 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="contact_name" type="Label" parent="contact_info"]
+layout_mode = 0
 offset_left = 97.0
 offset_top = 413.0
 offset_right = 410.0
 offset_bottom = 478.0
 theme_override_font_sizes/font_size = 25
+text = "N/A"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
 [node name="contact_message" type="Label" parent="contact_info"]
+layout_mode = 0
 offset_left = 98.0
 offset_top = 532.0
 offset_right = 411.0
 offset_bottom = 597.0
 theme_override_font_sizes/font_size = 20
+text = "No contacts locked"
 horizontal_alignment = 1
 vertical_alignment = 1
 
