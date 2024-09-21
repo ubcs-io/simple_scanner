@@ -1,18 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmlbato2pdp75"]
+[gd_scene load_steps=10 format=3 uid="uid://cmlbato2pdp75"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_fl0d2"]
 [ext_resource type="PackedScene" uid="uid://bx033pw32ucqt" path="res://cursor.tscn" id="1_q57yj"]
-[ext_resource type="PackedScene" uid="uid://defuwqrem14i6" path="res://contact.tscn" id="2_j4duc"]
+[ext_resource type="PackedScene" uid="uid://defuwqrem14i6" path="res://contacts/contact.tscn" id="2_j4duc"]
+[ext_resource type="PackedScene" uid="uid://dwn6u82lnhgb4" path="res://contacts/asteroid.tscn" id="3_5tyta"]
 [ext_resource type="PackedScene" uid="uid://dq1ok16w3lado" path="res://hud.tscn" id="4_33h0t"]
+[ext_resource type="PackedScene" uid="uid://q6to7483l0w7" path="res://contacts/object.tscn" id="4_333s5"]
 [ext_resource type="AudioStream" uid="uid://c8s3i0gxv8nte" path="res://assets/contact_new.ogg" id="5_fc2di"]
+[ext_resource type="PackedScene" uid="uid://686omov3buvv" path="res://contacts/data.tscn" id="5_ktinm"]
 [ext_resource type="AudioStream" uid="uid://52hvsblbg0jv" path="res://assets/contact_locked.ogg" id="6_u0sbw"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_fl0d2")
 contact = ExtResource("2_j4duc")
+asteroid = ExtResource("3_5tyta")
+object = ExtResource("4_333s5")
+data = ExtResource("5_ktinm")
 max_contacts = 3
-
-[node name="cursor" parent="." instance=ExtResource("1_q57yj")]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
@@ -28,8 +32,10 @@ stream = ExtResource("5_fc2di")
 [node name="contact_locked" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_u0sbw")
 
+[node name="cursor" parent="." instance=ExtResource("1_q57yj")]
+
 [connection signal="gameover" from="." to="." method="_on_gameover"]
-[connection signal="gameover" from="." to="cursor" method="_on_main_gameover"]
 [connection signal="gameover" from="." to="HUD" method="_on_main_gameover"]
-[connection signal="locked" from="cursor" to="." method="_increment_signals"]
+[connection signal="gameover" from="." to="cursor" method="_on_main_gameover"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="locked" from="cursor" to="." method="_increment_signals"]

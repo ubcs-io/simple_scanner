@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwn6u82lnhgb4"]
+
+[ext_resource type="Script" path="res://contacts/asteroid.gd" id="1_xigtp"]
+[ext_resource type="Texture2D" uid="uid://cbyi4l2rnppa2" path="res://assets/icons/meteor_squareDetailedLarge.png" id="2_p08oh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8dwoj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p08oh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kfmgx"]
+radius = 24.0
+
+[node name="asteroid" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_xigtp")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_8dwoj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kfmgx")
