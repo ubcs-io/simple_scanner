@@ -3,6 +3,7 @@ extends Area2D
 @export var speed = 400
 var screen_size
 var on_contact
+var desired_position
 
 signal hit
 signal locked
@@ -13,6 +14,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta) -> void:
+	
+	desired_position = position
+	
 	var velocity = Vector2.ZERO # The player's movement vector.
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
@@ -25,14 +29,24 @@ func _process(delta) -> void:
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
+	
+	# Update the desired position
+	desired_position += velocity * delta
+	var position_distance = position.distance_to(Vector2(820, 315))
+	var desired_position_distance = desired_position.distance_to(Vector2(820, 315))
 
-	position += velocity * delta
+	# Only move the cursor if the vect dist is less than the console radius
+	# Or if it moves it closer to the center
+	if position_distance < 280 || desired_position_distance < position_distance:
+		position += velocity * delta
+	
+	# Keep this as a fallback - cursor should stay in screen
 	position = position.clamp(Vector2.ZERO, screen_size)
 		
 	if Input.is_action_pressed("space"):
 		if on_contact != null:
 			lock_contact(on_contact)
-
+	
 func _on_body_entered(body):
 	hit.emit()
 	# Ideally this should activate an animation on the signal, but this'll do for now

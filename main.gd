@@ -42,7 +42,7 @@ func _ready() -> void:
 	server_heartbeat.start()
 
 func _process(_delta) -> void:
-
+	
 	if Input.is_action_pressed("speed_up"):
 		if ship_speed < 200:
 			ship_speed += 10
@@ -56,7 +56,7 @@ func _process(_delta) -> void:
 		search_for_life = randi_range(1,signal_rate) / ship_speed
 		if search_for_life < 5:
 			var contact = contact.instantiate()
-			contact.position = Vector2(randi_range(200,1100), randi_range(100,550))
+			contact.position = Vector2(820 + randi_range(-275,275), 315 + randi_range(-275,275))
 			add_child(contact)
 			print(get_tree().get_nodes_in_group("contacts").size())
 			contact_server(contact.get_instance_id(), 1337, "detected", "A new contact has appeared", "update")

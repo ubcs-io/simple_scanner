@@ -1,13 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://dq1ok16w3lado"]
+[gd_scene load_steps=5 format=3 uid="uid://dq1ok16w3lado"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_uydfi"]
+[ext_resource type="Texture2D" uid="uid://20f7xajwg52f" path="res://assets/ui_components/plate.png" id="2_du02q"]
+[ext_resource type="Texture2D" uid="uid://cur721q1l6nnb" path="res://assets/ui_components/button.png" id="3_oqdjm"]
+[ext_resource type="Texture2D" uid="uid://q27f3l0wlyg8" path="res://assets/ui_components/switch.png" id="4_d0ovp"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_uydfi")
 
+[node name="ScannerOverlay" type="Area2D" parent="."]
+
+[node name="ScannerPlate" type="Sprite2D" parent="ScannerOverlay"]
+position = Vector2(573.979, 328.75)
+scale = Vector2(1.07213, 1.08041)
+texture = ExtResource("2_du02q")
+
+[node name="Button" type="Sprite2D" parent="ScannerOverlay"]
+position = Vector2(280.82, 409.5)
+scale = Vector2(0.719039, 0.797771)
+texture = ExtResource("3_oqdjm")
+
+[node name="Button2" type="Sprite2D" parent="ScannerOverlay"]
+position = Vector2(282.82, 527.5)
+scale = Vector2(0.719039, 0.797771)
+texture = ExtResource("3_oqdjm")
+
+[node name="Switch" type="Sprite2D" parent="ScannerOverlay"]
+position = Vector2(270.82, 226.5)
+scale = Vector2(0.565287, 0.565287)
+texture = ExtResource("4_d0ovp")
+
+[node name="Switch3" type="Sprite2D" parent="ScannerOverlay"]
+position = Vector2(377.82, 221.5)
+scale = Vector2(0.565287, 0.565287)
+texture = ExtResource("4_d0ovp")
+flip_v = true
+
+[node name="Switch2" type="Sprite2D" parent="ScannerOverlay"]
+position = Vector2(167.82, 223.5)
+scale = Vector2(0.565287, 0.565287)
+texture = ExtResource("4_d0ovp")
+
 [node name="ScoreLabel" type="Label" parent="."]
-offset_right = 1155.0
-offset_bottom = 660.0
+offset_left = 8.0
+offset_top = -1.0
+offset_right = 1163.0
+offset_bottom = 659.0
 theme_override_font_sizes/font_size = 30
 text = "0"
 
