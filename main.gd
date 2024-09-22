@@ -104,12 +104,6 @@ func server_heartbeat_timeout():
 	var heartbeat = contact_server(1, 1337, "none", "none", "sync", "none", "none", "none")
 	
 func contact_server(id, session, status, message, event_type, category, type, flavor_text):
-	#contact_id = str(id)
-	#session = str(session)
-	#status = status.uri_encode()
-	#message = message.uri_encode()
-	#type = type.uri_encode()
-	#flavor_text = flavor_text.uri_encode()
 	
 	var fields = {"id": str(id),
 		"session": str(session),
@@ -127,14 +121,10 @@ func contact_server(id, session, status, message, event_type, category, type, fl
 	headers = ["Content-type: application/json"]
 	var url = root_url
 	
-	print(params)
+	#print(params)
 	url = url + params
 	var send_request = request.request(
 		url, headers, HTTPClient.METHOD_GET)
-		
-	#if send_request != OK:
-		#print(url)
-		#print('Issue with request')
 	
 func _on_request_completed(result, response_code, headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())
@@ -143,12 +133,12 @@ func _on_request_completed(result, response_code, headers, body):
 	update_game(json)
 	
 func update_game(heartbeat):
-	print(heartbeat)
+	#print(heartbeat)
 	#print(instance_from_id(int(heartbeat.id)))
-	#if 'status' in heartbeat && heartbeat.status == "locked" && at_menu == 0:
-		#if !locked_contacts.has(str(heartbeat.id)) && instance_from_id(int(heartbeat.id)) != null:
+	if 'status' in heartbeat && heartbeat.status == "locked" && at_menu == 0:
+		if !locked_contacts.has(str(heartbeat.id)) && instance_from_id(int(heartbeat.id)) != null:
 			#print("Remove by remote " + str(heartbeat.id))
-			#$cursor.lock_contact_by_id(heartbeat.id)
+			$cursor.lock_contact_by_id(heartbeat.id)
 
 # Game start/end methods
 func new_game():
