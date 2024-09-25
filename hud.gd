@@ -3,7 +3,6 @@ extends CanvasLayer
 signal start_game
 
 func _ready() -> void:
-	#$ScannerOverlay.hide()
 	$Score_widget.hide()
 	$contact_info.hide()
 
@@ -20,6 +19,7 @@ func update_ui_messages(contact_name, contact_message):
 	
 func _on_start_button_pressed():
 	$StartButton.hide()
+	$title.hide()
 	$ScannerOverlay.show()
 	$Score_widget.show()
 	$contact_info.show()

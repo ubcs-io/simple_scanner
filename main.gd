@@ -5,7 +5,7 @@ extends Node
 @export var object: PackedScene
 @export var data: PackedScene
 
-@export var ship_speed = 10
+@export var ship_speed = 1
 @export var signal_rate = 5000
 @export var max_contacts = 5
 
@@ -134,10 +134,12 @@ func _on_request_completed(result, response_code, headers, body):
 	
 func update_game(heartbeat):
 	#print(heartbeat)
+	print(locked_contacts)
 	#print(instance_from_id(int(heartbeat.id)))
 	if 'status' in heartbeat && heartbeat.status == "locked" && at_menu == 0:
 		if !locked_contacts.has(str(heartbeat.id)) && instance_from_id(int(heartbeat.id)) != null:
-			#print("Remove by remote " + str(heartbeat.id))
+			print("Remove by remote " + str(heartbeat.id))
+			print(locked_contacts)
 			$cursor.lock_contact_by_id(heartbeat.id)
 
 # Game start/end methods
@@ -148,7 +150,6 @@ func new_game():
 	$cursor.start($StartPosition.position)
 
 func _on_gameover():
-	#score = 0
 	credits = 0
 	capacity = starting_capacity
 	locked_contacts = []
