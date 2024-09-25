@@ -26,5 +26,12 @@ func _ready() -> void:
 	size = randi_range(100, 150)
 	category = "object"
 
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	
+	var center = Vector2(820, 315)
+	var velocity = Vector2.ZERO # The contact's movement vector.
+	var vector_to_center = position - center
+	position += (vector_to_center/20) * delta
+	
+	if position.distance_to(Vector2(820, 315)) > 300:
+		self.queue_free()

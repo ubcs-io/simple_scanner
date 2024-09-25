@@ -13,7 +13,7 @@ func _ready():
 	var available_types = [
 		[1,"Icy surface","The surface appears to be reflect visible light, likely an icy asteroid."], 
 		[3,"Metallic core", "This contact has a solid radar signature and high mass, contents are likely metallic."], 
-		[10,"Radioactive composition", "Picking up readings off the visible spectrum, this one seems to be emitting radiation."]
+		[10,"Radioactive core", "Picking up readings off the visible spectrum, this one seems to be emitting radiation."]
 	]
 	
 	var encountered = available_types.pick_random()
@@ -28,5 +28,12 @@ func _ready():
 	
 	return flavor_text
 
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+
+	var center = Vector2(820, 315)
+	var velocity = Vector2.ZERO # The contact's movement vector.
+	var vector_to_center = position - center
+	position += (vector_to_center/10) * delta
+	
+	if position.distance_to(Vector2(820, 315)) > 300:
+		self.queue_free()

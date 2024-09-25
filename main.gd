@@ -65,7 +65,7 @@ func _process(_delta) -> void:
 		search_for_life = randi_range(1,signal_rate) / ship_speed
 		if search_for_life < 5:
 			var contact = randomize_encounters()
-			contact.position = Vector2(820 + randi_range(-220,220), 315 + randi_range(-220,220))
+			contact.position = Vector2(820 + randi_range(-120,120), 315 + randi_range(-120,120))
 			add_child(contact)
 			contact_server(contact.get_instance_id(), 1337, "detected", "A new contact has appeared", "update", contact.category, contact.type, contact.flavor_text)
 			$contact_new.play()

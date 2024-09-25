@@ -16,7 +16,7 @@ contact = ExtResource("2_j4duc")
 asteroid = ExtResource("3_5tyta")
 object = ExtResource("4_333s5")
 data = ExtResource("5_ktinm")
-max_contacts = 3
+ship_speed = 10
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

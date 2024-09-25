@@ -13,7 +13,7 @@ func _ready() -> void:
 	var available_types = [
 		[1,"Faint signal","Hard to tell if something is really there, but could be worth scanning still."], 
 		[5,"Unusual repeated pattern", "Human or otherwise, this appears to be a manufactured signal and worth logging."], 
-		[9,"Unmapped radio broadcast", "A transmission that seems to be intentionally broadcast, though uncertain for whom."]
+		[12,"Unmapped radio broadcast", "A transmission that seems to be intentionally broadcast, though uncertain for whom."]
 	]
 	
 	var encountered = available_types.pick_random()
@@ -26,5 +26,12 @@ func _ready() -> void:
 	size = randi_range(75, 125)
 	category = "data"
 
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	
+	var center = Vector2(820, 315)
+	var velocity = Vector2.ZERO # The contact's movement vector.
+	var vector_to_center = position - center
+	position += (vector_to_center/30) * delta
+	
+	if position.distance_to(Vector2(820, 315)) > 300:
+		self.queue_free()
