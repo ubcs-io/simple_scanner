@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwn6u82lnhgb4"]
+[gd_scene load_steps=6 format=3 uid="uid://dwn6u82lnhgb4"]
 
 [ext_resource type="Script" path="res://contacts/asteroid.gd" id="1_xigtp"]
 [ext_resource type="Texture2D" uid="uid://cbyi4l2rnppa2" path="res://assets/icons/meteor_squareDetailedLarge.png" id="2_p08oh"]
-[ext_resource type="Texture2D" uid="uid://crdbc1sihqp7y" path="res://assets/crosshairs/Outline/crosshair122.png" id="3_6getn"]
-[ext_resource type="Texture2D" uid="uid://dfs1ie2fxli2a" path="res://assets/crosshairs/Outline/crosshair121.png" id="4_632tb"]
+[ext_resource type="Texture2D" uid="uid://bvb8vo6audl3l" path="res://assets/crosshairs/White/crosshair026.png" id="3_jw207"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8dwoj"]
 animations = [{
@@ -17,14 +16,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_6getn")
+"texture": ExtResource("3_jw207")
 }, {
-"duration": 1.0,
-"texture": ExtResource("4_632tb")
+"duration": 2.0,
+"texture": ExtResource("2_p08oh")
 }],
 "loop": true,
 "name": &"isolated",
-"speed": 5.0
+"speed": 20.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kfmgx"]

@@ -6,6 +6,7 @@ var size
 var type
 var category
 var flavor_text
+var vector_to_center
 
 func _ready():
 	add_to_group("contacts")
@@ -34,14 +35,8 @@ func _process(delta: float) -> void:
 	
 	var center = Vector2(820, 315)
 	var velocity = Vector2.ZERO # The contact's movement vector.
-	var vector_to_center = position - center
-	position += (vector_to_center/30) * delta
+	vector_to_center = position - center
+	position += (vector_to_center/25) * delta
 	
 	if position.distance_to(Vector2(820, 315)) > 300:
 		self.queue_free()
-
-func isolate():
-	$sprite.animation = "isolated"
-
-func deselect():
-	$sprite.animation = "default"

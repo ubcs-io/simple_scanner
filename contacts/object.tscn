@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://q6to7483l0w7"]
+[gd_scene load_steps=6 format=3 uid="uid://q6to7483l0w7"]
 
 [ext_resource type="Script" path="res://contacts/object.gd" id="1_707xu"]
 [ext_resource type="Texture2D" uid="uid://jq2ru2ml4aw4" path="res://assets/crosshairs/White/crosshair098.png" id="2_2k3v5"]
-[ext_resource type="Texture2D" uid="uid://dfs1ie2fxli2a" path="res://assets/crosshairs/Outline/crosshair121.png" id="3_32o8b"]
-[ext_resource type="Texture2D" uid="uid://crdbc1sihqp7y" path="res://assets/crosshairs/Outline/crosshair122.png" id="4_xx65g"]
+[ext_resource type="Texture2D" uid="uid://dkpnghw6vsqqh" path="res://assets/crosshairs/White/crosshair025.png" id="3_3wdkg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8dwoj"]
 animations = [{
@@ -16,11 +15,11 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 2.0,
-"texture": ExtResource("3_32o8b")
-}, {
 "duration": 1.0,
-"texture": ExtResource("4_xx65g")
+"texture": ExtResource("3_3wdkg")
+}, {
+"duration": 2.0,
+"texture": ExtResource("2_2k3v5")
 }],
 "loop": true,
 "name": &"isolated",
