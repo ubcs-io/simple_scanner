@@ -3,7 +3,6 @@ extends CanvasLayer
 signal start_game
 
 func _ready() -> void:
-	$ScannerOverlay.hide()
 	$Score_widget.hide()
 	$contact_info.hide()
 
@@ -20,6 +19,7 @@ func update_ui_messages(contact_name, contact_message):
 	
 func _on_start_button_pressed():
 	$StartButton.hide()
+	$title.hide()
 	$ScannerOverlay.show()
 	$Score_widget.show()
 	$contact_info.show()
@@ -29,8 +29,10 @@ func _on_start_button_pressed():
 
 func _on_main_gameover() -> void:
 	$StartButton.show()
-	$ScannerOverlay.hide()
 	$Score_widget/Capacity.text = str(0)
 	$contact_info/contact_name.text = str("")
 	$contact_info/contact_message.text = str("")
-	#$Score_widget.hide()
+
+
+func _on_cursor_isolated_contact(category, type) -> void:
+	update_ui_messages(category, type)

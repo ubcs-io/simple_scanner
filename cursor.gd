@@ -4,7 +4,11 @@ extends Area2D
 var screen_size
 var on_contact
 var desired_position
+var contact_id
+var current_contact
+var contacts_covered = []
 
+signal isolated_contact (type, category)
 signal hit
 signal locked
 
@@ -43,18 +47,41 @@ func _process(delta) -> void:
 	# Keep this as a fallback - cursor should stay in screen
 	position = position.clamp(Vector2.ZERO, screen_size)
 		
+	#print("contact is: " + str(on_contact))
+	
 	if Input.is_action_pressed("space"):
 		if on_contact != null:
+			#print(on_contact)
 			lock_contact(on_contact)
 	
 func _on_body_entered(body):
-	hit.emit()
-	# Ideally this should activate an animation on the signal, but this'll do for now
+	contacts_covered.append(str(body.get_instance_id()))
+	contact_id = contacts_covered[0]
+	current_contact = instance_from_id(int(contact_id))
+	isolated_contact.emit(current_contact.category, current_contact.type)
 	$contact_isolated.play()
-	on_contact = body
+	on_contact = current_contact
+	hit.emit()
+	
+	body.isolate();
+	
+	# Consider pinning the cursor movement to the contact
+	#body.get_movement();
+	
+	print(contacts_covered)
 	
 	# Send a connected call to the server indicating it's been isolated
+
+func _on_body_exited(body) -> void:
+	contacts_covered.erase(str(body.get_instance_id()))
+	if contacts_covered.size() > 0:
+		contact_id = contacts_covered[0]
+		current_contact = instance_from_id(int(contact_id))
+	else:
+		on_contact = null
 		
+	body.deselect();
+
 func lock_contact(body):	
 	if body.is_in_group("contacts"):
 		on_contact = null
@@ -71,8 +98,8 @@ func remove_body (body):
 	
 func start(pos):
 	position = pos
-	show()
+	self.show()
 	$CollisionShape2D.disabled = false
 
 func _on_main_gameover() -> void:
-	hide()
+	self.hide()
