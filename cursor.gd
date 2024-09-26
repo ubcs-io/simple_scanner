@@ -63,6 +63,11 @@ func _on_body_entered(body):
 	on_contact = current_contact
 	hit.emit()
 	
+	body.isolate();
+	
+	# Consider pinning the cursor movement to the contact
+	#body.get_movement();
+	
 	print(contacts_covered)
 	
 	# Send a connected call to the server indicating it's been isolated
@@ -74,6 +79,8 @@ func _on_body_exited(body) -> void:
 		current_contact = instance_from_id(int(contact_id))
 	else:
 		on_contact = null
+		
+	body.deselect();
 
 func lock_contact(body):	
 	if body.is_in_group("contacts"):

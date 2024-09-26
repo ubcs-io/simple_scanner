@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwn6u82lnhgb4"]
+[gd_scene load_steps=7 format=3 uid="uid://dwn6u82lnhgb4"]
 
 [ext_resource type="Script" path="res://contacts/asteroid.gd" id="1_xigtp"]
 [ext_resource type="Texture2D" uid="uid://cbyi4l2rnppa2" path="res://assets/icons/meteor_squareDetailedLarge.png" id="2_p08oh"]
+[ext_resource type="Texture2D" uid="uid://crdbc1sihqp7y" path="res://assets/crosshairs/Outline/crosshair122.png" id="3_6getn"]
+[ext_resource type="Texture2D" uid="uid://dfs1ie2fxli2a" path="res://assets/crosshairs/Outline/crosshair121.png" id="4_632tb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8dwoj"]
 animations = [{
@@ -12,6 +14,17 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6getn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_632tb")
+}],
+"loop": true,
+"name": &"isolated",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kfmgx"]
@@ -20,8 +33,9 @@ radius = 24.0
 [node name="asteroid" type="RigidBody2D"]
 gravity_scale = 0.0
 script = ExtResource("1_xigtp")
+metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_8dwoj")
 

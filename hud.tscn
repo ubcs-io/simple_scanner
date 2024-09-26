@@ -1,11 +1,31 @@
-[gd_scene load_steps=9 format=3 uid="uid://dq1ok16w3lado"]
+[gd_scene load_steps=11 format=3 uid="uid://dq1ok16w3lado"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_uydfi"]
 [ext_resource type="Texture2D" uid="uid://20f7xajwg52f" path="res://assets/ui_components/plate.png" id="2_du02q"]
 [ext_resource type="Texture2D" uid="uid://cur721q1l6nnb" path="res://assets/ui_components/button.png" id="3_oqdjm"]
-[ext_resource type="Texture2D" uid="uid://q27f3l0wlyg8" path="res://assets/ui_components/switch.png" id="4_d0ovp"]
+[ext_resource type="Texture2D" uid="uid://crrlf3nim8lek" path="res://assets/ui_components/switch_off.png" id="5_a1p1s"]
 [ext_resource type="FontFile" uid="uid://djoqjbmoesf7f" path="res://assets/fonts/Kenney Future.ttf" id="5_ciga5"]
+[ext_resource type="Texture2D" uid="uid://bhbigxu6t6vry" path="res://assets/ui_components/switch_on.png" id="6_bdos5"]
 [ext_resource type="FontFile" uid="uid://ba7rv3k4g33hl" path="res://assets/fonts/Kenney Future Narrow.ttf" id="6_mr2ve"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_87hvv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_a1p1s")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_bdos5")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
 
 [sub_resource type="InputEventAction" id="InputEventAction_v2qql"]
 action = &"start_game"
@@ -33,21 +53,25 @@ position = Vector2(281.82, 603.5)
 scale = Vector2(0.719039, 0.797771)
 texture = ExtResource("3_oqdjm")
 
-[node name="Switch" type="Sprite2D" parent="ScannerOverlay"]
-position = Vector2(269.82, 302.5)
-scale = Vector2(0.565287, 0.565287)
-texture = ExtResource("4_d0ovp")
+[node name="a_switch_1" type="AnimatedSprite2D" parent="ScannerOverlay"]
+position = Vector2(141.174, 296.174)
+scale = Vector2(0.41242, 0.41242)
+sprite_frames = SubResource("SpriteFrames_87hvv")
+animation = &"on"
+frame_progress = 0.70204
 
-[node name="Switch3" type="Sprite2D" parent="ScannerOverlay"]
-position = Vector2(376.82, 297.5)
-scale = Vector2(0.565287, 0.565287)
-texture = ExtResource("4_d0ovp")
-flip_v = true
+[node name="a_switch_2" type="AnimatedSprite2D" parent="ScannerOverlay"]
+position = Vector2(253.174, 297.174)
+scale = Vector2(0.41242, 0.41242)
+sprite_frames = SubResource("SpriteFrames_87hvv")
+animation = &"on"
+frame_progress = 0.472501
 
-[node name="Switch2" type="Sprite2D" parent="ScannerOverlay"]
-position = Vector2(166.82, 299.5)
-scale = Vector2(0.565287, 0.565287)
-texture = ExtResource("4_d0ovp")
+[node name="a_switch_3" type="AnimatedSprite2D" parent="ScannerOverlay"]
+position = Vector2(364.174, 295.174)
+scale = Vector2(0.41242, 0.41242)
+sprite_frames = SubResource("SpriteFrames_87hvv")
+animation = &"off"
 
 [node name="Score_widget" type="Control" parent="."]
 layout_mode = 3

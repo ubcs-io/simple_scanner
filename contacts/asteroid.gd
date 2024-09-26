@@ -37,3 +37,9 @@ func _process(delta: float) -> void:
 	
 	if position.distance_to(Vector2(820, 315)) > 300:
 		self.queue_free()
+
+func isolate():
+	$sprite.animation = "isolated"
+
+func deselect():
+	$sprite.animation = "default"
