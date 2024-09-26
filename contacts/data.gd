@@ -12,8 +12,8 @@ func _ready() -> void:
 
 	var available_types = [
 		[1,"Faint signal","Hard to tell if something is really there, but could be worth scanning still."], 
-		[5,"Unusual repeated pattern", "Human or otherwise, this appears to be a manufactured signal and worth logging."], 
-		[12,"Unmapped radio broadcast", "A transmission that seems to be intentionally broadcast, though uncertain for whom."]
+		[5,"Unusual pattern", "Human or otherwise, this appears to be a manufactured signal and worth logging."], 
+		[12,"Unmapped radio signal", "A transmission that seems to be intentionally broadcast, though uncertain for whom."]
 	]
 	
 	var encountered = available_types.pick_random()
@@ -28,16 +28,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
+	degrade_signal(0.0, 0.01)
+	
 	var center = Vector2(820, 315)
 	var velocity = Vector2.ZERO # The contact's movement vector.
 	var vector_to_center = position - center
-	position += (vector_to_center/40) * delta
+	position += (vector_to_center/35) * delta
 	
 	if position.distance_to(Vector2(820, 315)) > 300:
 		self.queue_free()
-
-func isolate():
-	$sprite.animation = "isolated"
-
-func deselect():
-	$sprite.animation = "default"

@@ -12,6 +12,11 @@ extends Node
 var request : HTTPRequest
 var root_url : String = "https://typeri.us/dora_brain?"
 
+var contact_variant
+var asteroid_rate = 2000
+var object_rate = 750
+var data_rate = 100
+	
 var score = 0
 var credits = 0
 var capacity = 0
@@ -36,6 +41,7 @@ var server_heartbeat := Timer.new()
 
 signal gameover
 signal locked
+signal pulse
 
 func _ready() -> void:
 	request = HTTPRequest.new()
@@ -70,11 +76,10 @@ func _process(_delta) -> void:
 			contact_server(contact.get_instance_id(), 1337, "detected", "A new contact has appeared", "update", contact.category, contact.type, contact.flavor_text)
 			$contact_new.play()
 
+	if Input.is_action_pressed("pulse"):
+		get_tree().call_group("contacts", "activate_contact")
+		
 func randomize_encounters():
-	var contact_variant
-	var asteroid_rate = 2000
-	var object_rate = 750
-	var data_rate = 100
 	var rand = randf_range(0,asteroid_rate + object_rate + data_rate)
 	if rand <= asteroid_rate:
 		contact_variant = asteroid
@@ -94,8 +99,7 @@ func _increment_signals(contact_id):
 	contact_server(contact_id, 1337, "locked", "Contact locked", "update",locked_contact.category, locked_contact.type, "The contact has been successfully locked")
 	$HUD.update_score(credits, capacity)
 	
-	# This should move to be triggered by the cursor hit instead of lock
-	$HUD.update_ui_messages(locked_contact.category, locked_contact.type)
+	#$HUD.update_ui_messages(locked_contact.category, locked_contact.type)
 	if capacity <= 0:
 		gameover.emit()
 		get_tree().call_group("contacts", "queue_free")
