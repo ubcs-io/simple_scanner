@@ -38,4 +38,6 @@ stream = ExtResource("6_u0sbw")
 [connection signal="gameover" from="." to="HUD" method="_on_main_gameover"]
 [connection signal="gameover" from="." to="cursor" method="_on_main_gameover"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="body_exited" from="cursor" to="cursor" method="_on_body_exited"]
+[connection signal="isolated_contact" from="cursor" to="HUD" method="_on_cursor_isolated_contact"]
 [connection signal="locked" from="cursor" to="." method="_increment_signals"]

@@ -101,7 +101,8 @@ func _increment_signals(contact_id):
 		get_tree().call_group("contacts", "queue_free")
 
 func server_heartbeat_timeout():
-	var heartbeat = contact_server(1, 1337, "none", "none", "sync", "none", "none", "none")
+	#var heartbeat = contact_server(1, 1337, "none", "none", "sync", "none", "none", "none")
+	pass
 	
 func contact_server(id, session, status, message, event_type, category, type, flavor_text):
 	
@@ -123,8 +124,7 @@ func contact_server(id, session, status, message, event_type, category, type, fl
 	
 	#print(params)
 	url = url + params
-	var send_request = request.request(
-		url, headers, HTTPClient.METHOD_GET)
+	#var send_request = request.request(url, headers, HTTPClient.METHOD_GET)
 	
 func _on_request_completed(result, response_code, headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())
@@ -156,4 +156,3 @@ func _on_gameover():
 	at_menu = 1
 	await get_tree().create_timer(2.0).timeout
 	contact_server(1, 1337, "none", "No contacts present", "update", "none", "none", "none")
-	

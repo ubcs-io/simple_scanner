@@ -32,3 +32,7 @@ func _on_main_gameover() -> void:
 	$Score_widget/Capacity.text = str(0)
 	$contact_info/contact_name.text = str("")
 	$contact_info/contact_message.text = str("")
+
+
+func _on_cursor_isolated_contact(category, type) -> void:
+	update_ui_messages(category, type)

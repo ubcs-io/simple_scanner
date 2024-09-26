@@ -16,13 +16,14 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5xncm"]
-radius = 46.0435
+radius = 12.0
 
 [node name="cursor" type="Area2D"]
 script = ExtResource("1_jpcwt")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_ef7h1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
