@@ -28,6 +28,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
+	degrade_signal(0.0, 0.01)
+	
 	var center = Vector2(820, 315)
 	var velocity = Vector2.ZERO # The contact's movement vector.
 	var vector_to_center = position - center

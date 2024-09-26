@@ -29,7 +29,9 @@ func _ready():
 	return flavor_text
 
 func _process(delta: float) -> void:
-
+	
+	degrade_signal(0.1, 0.001)
+	
 	var center = Vector2(820, 315)
 	var velocity = Vector2.ZERO # The contact's movement vector.
 	var vector_to_center = position - center
